@@ -7,6 +7,6 @@
 
 2. 安裝 Python 3.7 之後的版本 : 推薦安裝 Python 3.10，這樣還可以玩一些其它的 Python 開源 AI 生成圖片的專案，在安裝 Python 時請記得把 "Add to PATH"勾選，再進行安裝。
 
-3. 安裝 Python 依賴套件 : 安裝 Python 完成後，進到命名提示字元，輸入 `pip install pyside6 openai`
+3. 安裝 Python 依賴套件 : 安裝 Python 完成後，進到命令提示字元(CMD)，輸入 `pip install pyside6 openai`
 
 上列步驟都正確完成後，就可以正常執行 chatgpt_client，你可以用 GIT指令 `git clone http://github.com/ccutmis/chatgpt_client.git` 或是 下載 [https://github.com/ccutmis/chatgpt_client/archive/refs/heads/master.zip](https://github.com/ccutmis/chatgpt_client/archive/refs/heads/master.zip) 並將它解壓縮到 C:\ 底下，例如: C:\chatgpt_client，然後執行裡面的 app.py 順利的話就能看見聊天圖型介面了!
