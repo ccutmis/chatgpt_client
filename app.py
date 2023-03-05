@@ -39,7 +39,7 @@ class Ui2(CustomUi):
         self.input_msg.setPlainText('')
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H:%M:%S")
-        self.show_msg.append("### "+date_time+" ChatGPT說 : "+return_msg+'\n\n-----\n')
+        self.show_msg.append("### "+date_time+" ChatGPT說 : \n"+return_msg+'\n\n-----\n')
 
     def save_chat_record(self):
         try:
@@ -61,9 +61,10 @@ def main():
     with open("resource/styles.qss") as f: 
         app.setStyleSheet(f.read())
     w = Ui2("resource/main.ui")
+    w.setWindowIcon(QIcon('resource/images/chatgpt-icon.svg'))
     w.send_btn.clicked.connect(lambda:w.talk_to_chatGPT())
     w.save_btn.clicked.connect(lambda:w.save_chat_record())
-    w.setWindowTitle("ChatGPT-MSN")
+    w.setWindowTitle("ChatGPT")
     w.setMinimumSize(800,600)
     w.show()
     app.exec()
