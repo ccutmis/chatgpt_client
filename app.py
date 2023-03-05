@@ -10,6 +10,7 @@ from datetime import datetime
 import os
 import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
+conversation_history = []
 
 class Ui2(CustomUi):
     def set_folder_path(self):
@@ -22,8 +23,10 @@ class Ui2(CustomUi):
             self.label_file.setText(tmp[0])
 
     def talk_to_chatGPT(self,model="gpt-3.5-turbo"):
+        global conversation_history
         quiz = self.input_msg.toPlainText()
         if quiz.strip() == "": return
+        conversation_history.append({"role": "user", "content": quiz})
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H:%M:%S")
         self.show_msg.append("### "+date_time+' 我說 : \n'+quiz+'\n')
