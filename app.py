@@ -32,15 +32,15 @@ class Ui2(CustomUi):
         self.show_msg.append("### "+date_time+' 我說 : \n'+quiz+'\n')
         completion = openai.ChatCompletion.create(
             model=model,
-            messages=[
-            {"role": "user", "content": quiz}
-            ]
+            messages=[{"role":x['role'],"content":x['content']} for x in conversation_history]
         )
-        #return completion.choices[0].message['content']
+        return_msg = completion.choices[0].message['content']
+        conversation_history.append({"role": "assistant", "content": return_msg})
         self.input_msg.setPlainText('')
         now = datetime.now()
         date_time = now.strftime("%Y-%m-%d %H:%M:%S")
-        self.show_msg.append("### "+date_time+" ChatGPT說 : "+completion.choices[0].message['content']+'\n\n-----\n')
+        self.show_msg.append("### "+date_time+" ChatGPT說 : "+return_msg+'\n\n-----\n')
+
     def save_chat_record(self):
         try:
             ans = self.show_dialog('另存文檔確認','確定要 將聊天內容另存為文字檔嗎? 按下確定後會開始另存...　過程中請勿操作滑鼠鍵盤。','Information',(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No))
