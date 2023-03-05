@@ -23,8 +23,10 @@ class Ui2(CustomUi):
 
     def talk_to_chatGPT(self,model="gpt-3.5-turbo"):
         quiz = self.input_msg.toPlainText()
-        if quiz.strip() == "": return 
-        self.show_msg.append("我 : \n\n"+quiz+'\n\n')
+        if quiz.strip() == "": return
+        now = datetime.now()
+        date_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        self.show_msg.append("### "+date_time+' 我說 : \n'+quiz+'\n')
         completion = openai.ChatCompletion.create(
             model=model,
             messages=[
@@ -33,7 +35,9 @@ class Ui2(CustomUi):
         )
         #return completion.choices[0].message['content']
         self.input_msg.setPlainText('')
-        self.show_msg.append("GPT : \n"+completion.choices[0].message['content']+'\n\n')
+        now = datetime.now()
+        date_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        self.show_msg.append("### "+date_time+" ChatGPT說 : "+completion.choices[0].message['content']+'\n\n-----\n')
     def save_chat_record(self):
         try:
             ans = self.show_dialog('另存文檔確認','確定要 將聊天內容另存為文字檔嗎? 按下確定後會開始另存...　過程中請勿操作滑鼠鍵盤。','Information',(QMessageBox.StandardButton.Yes|QMessageBox.StandardButton.No))
@@ -56,8 +60,9 @@ def main():
     w = Ui2("resource/main.ui")
     w.send_btn.clicked.connect(lambda:w.talk_to_chatGPT())
     w.save_btn.clicked.connect(lambda:w.save_chat_record())
-    w.show()
     w.setWindowTitle("ChatGPT-MSN")
+    w.setMinimumSize(800,600)
+    w.show()
     app.exec()
 
 if __name__ == "__main__" : main()
