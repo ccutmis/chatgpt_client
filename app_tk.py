@@ -36,8 +36,8 @@ class Application(tk.Frame):
             now = datetime.now()
             date_time = now.strftime("%Y%m%d_%H%M%S")
             with open(date_time+'.md','w+',encoding='utf-8') as f:
-                f.write(self.output_box.get("1.0",tk.END))
-            #mbox.showinfo("提示", "您選擇了繼續！")
+                f.write(self.output_box.get("1.0",tk.END)+"\n ## conversation_history: \n"+str(self.conversation_history).replace('},',',\n'))
+            mbox.showinfo("另存文檔完成", '另存文檔完成，檔名為:'+date_time+'.md')
         else:
             return
 
