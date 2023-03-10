@@ -45,9 +45,6 @@ def submit():
     #print('\n目前已使用Tokens: '+str(used_tokens)+'\n')
 
 def main():
-    print("sfsf")
-
-if __name__ == "__main__": 
     while(1):
         my_choice = input("\n選擇要執行的動作(1.向ChatGPT提問 2.存檔聊天記錄 3.查詢已用Tokens 4.離開): ")
         if my_choice.strip()=='1':
@@ -62,3 +59,5 @@ if __name__ == "__main__":
             break
         else:
             print('\n輸入選擇錯誤…請重試...')
+
+if __name__ == "__main__": main()
