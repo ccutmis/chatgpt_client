@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
-    <height>564</height>
+    <width>602</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -61,6 +61,37 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_token_count">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>微軟正黑體</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>目前已使用Tokens:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QTextEdit" name="input_msg">
         <property name="minimumSize">
          <size>
@@ -71,7 +102,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>100</height>
+          <height>200</height>
          </size>
         </property>
         <property name="font">
