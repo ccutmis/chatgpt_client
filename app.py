@@ -1,9 +1,7 @@
-from PySide6.QtWidgets import QApplication,QMessageBox,QGraphicsOpacityEffect
-from PySide6.QtGui import QKeySequence,QIcon
-from PySide6.QtCore import QSize,QPropertyAnimation,QRect
+from PySide6.QtWidgets import * 
+from PySide6.QtGui import * 
+from PySide6.QtCore import * 
 from customLib.CustomMain import CustomUi
-from customLib.TableWidget import TableWidget
-from PySide6.QtCore import Qt,QCoreApplication
 
 
 from datetime import datetime
@@ -12,6 +10,17 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
 conversation_history = []
 used_tokens = 0
+do_submit = 0
+
+class MyTextEdit(QTextEdit):
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        global do_submit
+        if event.key() == Qt.Key_Return and event.modifiers() == Qt.AltModifier:
+            # ALT+Enter is detected, do something
+            do_submit = 1
+            print("ALT+Enter is pressed!")
+        else:
+            super().keyPressEvent(event)
 
 class Ui2(CustomUi):
     def set_folder_path(self):
@@ -24,7 +33,8 @@ class Ui2(CustomUi):
             self.label_file.setText(tmp[0])
 
     def talk_to_chatGPT(self,model="gpt-3.5-turbo"):
-        global conversation_history,used_tokens
+        global conversation_history,used_tokens,do_submit
+        do_submit = 0
         quiz = self.input_msg.toPlainText()
         if quiz.strip() == "": return
         conversation_history.append({"role": "user", "content": quiz})
@@ -60,6 +70,7 @@ class Ui2(CustomUi):
 
 
 def main():
+    global do_submit
     import sys
     QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
     app = QApplication(sys.argv)
@@ -71,6 +82,16 @@ def main():
     w.save_btn.clicked.connect(lambda:w.save_chat_record())
     w.setWindowTitle("ChatGPT")
     w.setMinimumSize(800,600)
+    w.timer = QTimer()
+    w.timer.timeout.connect(lambda:w.talk_to_chatGPT() if do_submit==1 else print('\b'*2, end='', flush=True))
+    w.timer.start(1000)
+    w.input_msg = MyTextEdit()
+    # 設置字型和尺寸
+    font = QFont()
+    font.setPointSize(16)  # 设置字体大小
+    font.setFamily("微軟正黑體")  # 设置字体名称
+    w.input_msg.setFont(font)
+    w.v_layout.addWidget(w.input_msg)
     w.show()
     app.exec()
 

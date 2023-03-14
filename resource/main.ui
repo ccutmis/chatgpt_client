@@ -42,7 +42,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
-       <number>0</number>
+       <number>7</number>
       </property>
       <item>
        <widget class="QTextEdit" name="show_msg">
@@ -92,29 +92,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QTextEdit" name="input_msg">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>200</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>微軟正黑體 Light</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="v_layout"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
